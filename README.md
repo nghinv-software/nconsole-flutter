@@ -4,7 +4,7 @@ A library for show log in console
 
 ## Getting Started
 
-![Demo NConsole](./assets/demo_nconsole.png)
+![Demo NConsole](https://github.com/nghinv-software/nconsole-flutter/blob/main/assets/demo_nconsole.png)
 
 ## Installation
 
