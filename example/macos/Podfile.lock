@@ -1,0 +1,28 @@
+PODS:
+  - fast_rsa (0.6.0):
+    - FlutterMacOS
+  - FlutterMacOS (1.0.0)
+  - nghinv_device_info (0.0.1):
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - fast_rsa (from `Flutter/ephemeral/.symlinks/plugins/fast_rsa/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+  - nghinv_device_info (from `Flutter/ephemeral/.symlinks/plugins/nghinv_device_info/macos`)
+
+EXTERNAL SOURCES:
+  fast_rsa:
+    :path: Flutter/ephemeral/.symlinks/plugins/fast_rsa/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+  nghinv_device_info:
+    :path: Flutter/ephemeral/.symlinks/plugins/nghinv_device_info/macos
+
+SPEC CHECKSUMS:
+  fast_rsa: 47a50bec1042c8c01726007dc0590a078418f997
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+  nghinv_device_info: 4ebccbb3db4b8cb68d0d05e160fb0da6c6d3591f
+
+PODFILE CHECKSUM: 7eb67ce9b23eadd199e1de0abdfd846d2d7fd885
+
+COCOAPODS: 1.12.1

@@ -1,0 +1,23 @@
+name: nconsole
+description: A package to help you debug your Flutter app on the fly.
+version: 1.0.0
+homepage: https://github.com/nghinv-software/nconsole-flutter
+maintainer: nghinv (@Nghi-NV)
+
+environment:
+  sdk: ">=2.19.6 <3.0.0"
+  flutter: ">=2.5.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  crypton: ^2.1.0
+  encrypt: ^5.0.1
+  fast_rsa: ^3.6.1
+  web_socket_channel: ^2.4.0
+  nghinv_device_info: ^0.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
