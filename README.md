@@ -8,6 +8,8 @@ A library for show log in console
 
 ## Installation
 
+App desktop download [NConsole](https://drive.google.com/drive/folders/1P4cqXhalzsiPtrVAKWvoD9tK_pt9ZpzJ?usp=share_link)
+
 ```sh
 flutter pub add nconsole
 ```

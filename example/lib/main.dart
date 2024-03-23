@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
           child: ElevatedButton(
             onPressed: () async {
               if (Platform.isAndroid) {
-                NConsole.setUri("10.10.50.16");
+                NConsole.setUri("192.168.75.4");
               }
               NConsole.isEnable = true;
 
