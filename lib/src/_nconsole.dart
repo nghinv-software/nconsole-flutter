@@ -46,7 +46,7 @@ class NConsole {
   /// NConsole.groupEnd();
   /// ```
   static dynamic group = _VarArgsFunction((args) {
-    _sendRequest(args, _LogType.group);
+    _sendRequest(args, LogType.group);
   }, isEnable);
 
   /// Send log group collapsed to [Server Log] app
@@ -61,31 +61,31 @@ class NConsole {
   /// NConsole.groupEnd();
   /// ```
   static dynamic groupCollapsed = _VarArgsFunction((args) {
-    _sendRequest(args, _LogType.groupCollapsed);
+    _sendRequest(args, LogType.groupCollapsed);
   }, isEnable);
 
   /// End log group or collapsed group
   static dynamic groupEnd = _VarArgsFunction((args) {
-    _sendRequest(args, _LogType.groupEnd);
+    _sendRequest(args, LogType.groupEnd);
   }, isEnable);
 
   /// Send log info to [Server Log] app
   static dynamic info = _VarArgsFunction((args) {
-    _sendRequest(args, _LogType.info);
+    _sendRequest(args, LogType.info);
   }, isEnable);
 
   /// Send log warn to [Server Log] app
   static dynamic warn = _VarArgsFunction((args) {
-    _sendRequest(args, _LogType.warn);
+    _sendRequest(args, LogType.warn);
   }, isEnable);
 
   /// Send log error to [Server Log] app
   static dynamic error = _VarArgsFunction((args) {
-    _sendRequest(args, _LogType.error);
+    _sendRequest(args, LogType.error);
   }, isEnable);
 
   static dynamic clear = _VarArgsFunction((args) {
-    _sendRequest(args, _LogType.clear);
+    _sendRequest(args, LogType.clear);
   }, isEnable);
 
   static NConsole? __instance;
@@ -109,6 +109,8 @@ class NConsole {
 
   bool _useSecure = true;
 
+  Function(String)? _listenLog;
+
   static setUseSecure(bool value) {
     _instance._useSecure = value;
   }
@@ -125,6 +127,12 @@ class NConsole {
 
   static set isEnable(bool value) {
     _instance._isEnable = value;
+  }
+
+  static String get uri => _instance._uri;
+
+  static setLogListen(Function(String)? listen) {
+    _instance._listenLog = listen;
   }
 
   static setClientInfo(ClientInfo? clientInfo) {
@@ -236,10 +244,12 @@ class NConsole {
   }
 
   static dynamic _sendRequest(List<dynamic> args,
-      [_LogType type = _LogType.log]) async {
+      [LogType type = LogType.log]) async {
     if (!_instance._isEnable) {
       return;
     }
+
+    _instance._listenLog?.call(json.encode(args));
 
     if (_instance._clientInfo == null) {
       final deviceInfo = await NDeviceInfo().getDeviceInfo();

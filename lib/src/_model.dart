@@ -80,7 +80,7 @@ class ClientInfo {
   }
 }
 
-enum _LogType {
+enum LogType {
   log,
   info,
   warn,
@@ -89,11 +89,12 @@ enum _LogType {
   groupCollapsed,
   groupEnd,
   clear,
+  bloc,
 }
 
 class _RequestData {
   final int timestamp;
-  final _LogType logType;
+  final LogType logType;
   final bool secure;
   final _PayloadData payload;
 
