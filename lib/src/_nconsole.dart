@@ -88,6 +88,10 @@ class NConsole {
     _sendRequest(args, LogType.clear);
   }, isEnable);
 
+  static dynamic bloc = _VarArgsFunction((args) {
+    _sendRequest(args, LogType.bloc);
+  }, isEnable);
+
   static NConsole? __instance;
 
   static NConsole get _instance {
@@ -105,11 +109,9 @@ class NConsole {
 
   WebSocketChannel? _webSocket;
 
-  bool _isConnected = false;
-
   bool _useSecure = true;
 
-  Function(String)? _listenLog;
+  Function(List<dynamic>, LogType)? _listenLog;
 
   static setUseSecure(bool value) {
     _instance._useSecure = value;
@@ -131,7 +133,7 @@ class NConsole {
 
   static String get uri => _instance._uri;
 
-  static setLogListen(Function(String)? listen) {
+  static setLogListener(Function(List<dynamic>, LogType)? listen) {
     _instance._listenLog = listen;
   }
 
@@ -171,8 +173,8 @@ class NConsole {
     return uriNew;
   }
 
-  Future _connectWebSocket() async {
-    if (_instance._webSocket != null && _instance._isConnected) {
+  Future _connectWebSocket([String? data]) async {
+    if (_instance._webSocket != null) {
       return;
     }
 
@@ -183,28 +185,30 @@ class NConsole {
     try {
       _instance._webSocket =
           WebSocketChannel.connect(Uri.parse(_instance._uri));
-      await _instance._webSocket!.ready.then((_) {
-        _instance._isConnected = true;
+      _instance._webSocket!.ready.then((_) {
         _instance._webSocket!.stream.listen(
-          (event) {
-            _instance._isConnected = true;
-          },
+          (event) {},
           onDone: () {
             _instance._webSocket = null;
-            _instance._isConnected = false;
           },
           onError: (error) {
             _instance._webSocket = null;
-            _instance._isConnected = false;
           },
           cancelOnError: true,
         );
       }).onError((error, stackTrace) {
         _instance._webSocket = null;
-        _instance._isConnected = false;
       });
     } catch (e) {
-      _instance._isConnected = false;
+      _instance._webSocket = null;
+    }
+
+    if (_instance._webSocket == null) {
+      return;
+    }
+
+    if (data != null) {
+      _instance._webSocket!.sink.add(data);
     }
   }
 
@@ -249,7 +253,9 @@ class NConsole {
       return;
     }
 
-    _instance._listenLog?.call(json.encode(args));
+    if (type == LogType.group) {}
+
+    _instance._listenLog?.call(args, type);
 
     if (_instance._clientInfo == null) {
       final deviceInfo = await NDeviceInfo().getDeviceInfo();
@@ -284,12 +290,16 @@ class NConsole {
       payload: payload,
     );
 
-    if (_instance._isConnected) {
-      _instance._webSocket?.sink.add(json.encode(dataRequest.toJson()));
-    } else {
-      await _instance._connectWebSocket();
-      await Future.delayed(const Duration(milliseconds: 100));
-      _instance._webSocket?.sink.add(json.encode(dataRequest.toJson()));
+    if (_instance._webSocket == null) {
+      _instance._connectWebSocket(json.encode(dataRequest.toJson()));
+      return;
     }
+
+    if (_instance._webSocket!.closeCode != null) {
+      _instance._connectWebSocket(json.encode(dataRequest.toJson()));
+      return;
+    }
+
+    _instance._webSocket!.sink.add(json.encode(dataRequest.toJson()));
   }
 }
