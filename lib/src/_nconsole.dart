@@ -32,7 +32,7 @@ class NConsole {
   /// ```
   static dynamic log = _VarArgsFunction((args) {
     _sendRequest(args);
-  }, isEnable);
+  });
 
   /// Send log group to [Server Log] app
   ///
@@ -47,7 +47,7 @@ class NConsole {
   /// ```
   static dynamic group = _VarArgsFunction((args) {
     _sendRequest(args, LogType.group);
-  }, isEnable);
+  });
 
   /// Send log group collapsed to [Server Log] app
   ///
@@ -62,35 +62,35 @@ class NConsole {
   /// ```
   static dynamic groupCollapsed = _VarArgsFunction((args) {
     _sendRequest(args, LogType.groupCollapsed);
-  }, isEnable);
+  });
 
   /// End log group or collapsed group
   static dynamic groupEnd = _VarArgsFunction((args) {
     _sendRequest(args, LogType.groupEnd);
-  }, isEnable);
+  });
 
   /// Send log info to [Server Log] app
   static dynamic info = _VarArgsFunction((args) {
     _sendRequest(args, LogType.info);
-  }, isEnable);
+  });
 
   /// Send log warn to [Server Log] app
   static dynamic warn = _VarArgsFunction((args) {
     _sendRequest(args, LogType.warn);
-  }, isEnable);
+  });
 
   /// Send log error to [Server Log] app
   static dynamic error = _VarArgsFunction((args) {
     _sendRequest(args, LogType.error);
-  }, isEnable);
+  });
 
   static dynamic clear = _VarArgsFunction((args) {
     _sendRequest(args, LogType.clear);
-  }, isEnable);
+  });
 
   static dynamic bloc = _VarArgsFunction((args) {
     _sendRequest(args, LogType.bloc);
-  }, isEnable);
+  });
 
   static NConsole? __instance;
 
@@ -119,6 +119,8 @@ class NConsole {
 
   static setUri(String? uri) {
     _instance._uri = _instance._getUri(uri);
+    _instance._webSocket?.sink.close();
+    _instance._webSocket = null;
   }
 
   static setPublicKey(String? publicKey) {

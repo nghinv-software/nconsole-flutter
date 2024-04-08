@@ -4,15 +4,14 @@ typedef _OnCall = void Function(List<dynamic> arguments);
 
 class _VarArgsFunction {
   final _OnCall callback;
-  final bool isEnable;
 
-  _VarArgsFunction(this.callback, this.isEnable);
+  _VarArgsFunction(this.callback);
 
   void call() => callback([]);
 
   @override
   dynamic noSuchMethod(Invocation invocation) {
-    if (!isEnable) return;
+    if (!NConsole._instance._isEnable) return;
 
     return callback(
       invocation.positionalArguments.map(
