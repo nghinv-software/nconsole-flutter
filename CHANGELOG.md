@@ -1,3 +1,7 @@
+## 1.0.6
+
+- Change name iPhone device
+
 ## 1.0.5
 
 - Fix bug change isEnabled
