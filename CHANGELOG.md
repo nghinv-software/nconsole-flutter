@@ -1,3 +1,7 @@
+## 1.1.0
+
+- Fix build with windows
+
 ## 1.0.6
 
 - Change name iPhone device
