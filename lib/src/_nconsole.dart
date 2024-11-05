@@ -264,6 +264,10 @@ class NConsole {
 
   static dynamic _sendRequest(List<dynamic> args,
       [LogType type = LogType.log]) async {
+    if (_instance._enableSaveLog) {
+      _instance._listenSaveLog?.call(args, type);
+    }
+
     if (!_instance._isEnable) {
       return;
     }
