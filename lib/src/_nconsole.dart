@@ -101,6 +101,8 @@ class NConsole {
 
   bool _isEnable = kDebugMode;
 
+  bool _enableSaveLog = false;
+
   String? _publicKey;
 
   String _uri = _kDefaultUri;
@@ -112,6 +114,7 @@ class NConsole {
   bool _useSecure = true;
 
   Function(List<dynamic>, LogType)? _listenLog;
+  Function(List<dynamic>, LogType)? _listenSaveLog;
 
   static setUseSecure(bool value) {
     _instance._useSecure = value;
@@ -133,10 +136,20 @@ class NConsole {
     _instance._isEnable = value;
   }
 
+  static bool get enableSaveLog => _instance._enableSaveLog;
+
+  static set enableSaveLog(bool value) {
+    _instance._enableSaveLog = value;
+  }
+
   static String get uri => _instance._uri;
 
   static setLogListener(Function(List<dynamic>, LogType)? listen) {
     _instance._listenLog = listen;
+  }
+
+  static setSaveLogListener(Function(List<dynamic>, LogType)? listen) {
+    _instance._listenSaveLog = listen;
   }
 
   static setClientInfo(ClientInfo? clientInfo) {

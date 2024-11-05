@@ -11,7 +11,9 @@ class _VarArgsFunction {
 
   @override
   dynamic noSuchMethod(Invocation invocation) {
-    if (!NConsole._instance._isEnable) return;
+    if (!NConsole._instance._isEnable && !NConsole._instance._enableSaveLog) {
+      return;
+    }
 
     return callback(
       invocation.positionalArguments.map(
