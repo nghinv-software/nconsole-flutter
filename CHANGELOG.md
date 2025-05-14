@@ -1,4 +1,4 @@
-## 1.2.0
+## 1.2.1
 
 - Upgrade package device info support android namespace
 
