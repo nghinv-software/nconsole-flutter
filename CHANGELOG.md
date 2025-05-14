@@ -1,3 +1,7 @@
+## 1.2.0
+
+- Upgrade package device info support android namespace
+
 ## 1.1.0
 
 - Fix build with windows

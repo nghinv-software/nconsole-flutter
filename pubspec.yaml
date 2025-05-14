@@ -1,6 +1,6 @@
 name: nconsole
 description: A package to help you debug your Flutter app on the fly.
-version: 1.1.2
+version: 1.2.0
 homepage: https://github.com/nghinv-software/nconsole-flutter
 maintainer: nghinv (@Nghi-NV)
 
