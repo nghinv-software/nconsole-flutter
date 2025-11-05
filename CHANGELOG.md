@@ -1,3 +1,7 @@
+## 1.3.0
+
+- Upgrade fast_rsa lib to fix 16kb
+
 ## 1.2.1
 
 - Upgrade package device info support android namespace
