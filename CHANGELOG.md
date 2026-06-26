@@ -1,3 +1,7 @@
+## 1.3.1
+
+- Remove unused fast_rsa dependency
+
 ## 1.3.0
 
 - Upgrade fast_rsa lib to fix 16kb
